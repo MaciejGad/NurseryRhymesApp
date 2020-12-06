@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Connection",
+        "repositoryURL": "git@github.com:MaciejGad/NurseryRhymesConnection.git",
+        "state": {
+          "branch": "main",
+          "revision": "39b8e14de7cd90b2a27cbb69279d292819106845",
+          "version": null
+        }
+      },
+      {
+        "package": "Models",
+        "repositoryURL": "git@github.com:MaciejGad/NurseryRhymesModels.git",
+        "state": {
+          "branch": "main",
+          "revision": "97e6f2bee92e16609f17c0a170bb5c53989a8cb3",
+          "version": null
+        }
+      },
+      {
+        "package": "SnapshotTesting",
+        "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing.git",
+        "state": {
+          "branch": null,
+          "revision": "c466812aa2e22898f27557e2e780d3aad7a27203",
+          "version": "1.8.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

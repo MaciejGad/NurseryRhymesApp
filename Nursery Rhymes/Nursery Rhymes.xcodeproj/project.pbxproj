@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,9 @@
 		D923B4B0257D6E27001C5760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D923B4AE257D6E27001C5760 /* LaunchScreen.storyboard */; };
 		D923B4BB257D6E27001C5760 /* Nursery_RhymesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B4BA257D6E27001C5760 /* Nursery_RhymesTests.swift */; };
 		D923B4C6257D6E27001C5760 /* Nursery_RhymesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B4C5257D6E27001C5760 /* Nursery_RhymesUITests.swift */; };
+		D923B4E5257D83E1001C5760 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = D923B4E4257D83E1001C5760 /* SnapshotTesting */; };
+		D923B4EB257D842B001C5760 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = D923B4EA257D842B001C5760 /* Models */; };
+		D923B4F1257D8461001C5760 /* Connection in Frameworks */ = {isa = PBXBuildFile; productRef = D923B4F0257D8461001C5760 /* Connection */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D923B4F1257D8461001C5760 /* Connection in Frameworks */,
+				D923B4EB257D842B001C5760 /* Models in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D923B4E5257D83E1001C5760 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +149,10 @@
 			dependencies = (
 			);
 			name = "Nursery Rhymes";
+			packageProductDependencies = (
+				D923B4EA257D842B001C5760 /* Models */,
+				D923B4F0257D8461001C5760 /* Connection */,
+			);
 			productName = "Nursery Rhymes";
 			productReference = D923B4A0257D6E26001C5760 /* Nursery Rhymes.app */;
 			productType = "com.apple.product-type.application";
@@ -161,6 +171,9 @@
 				D923B4B8257D6E27001C5760 /* PBXTargetDependency */,
 			);
 			name = "Nursery RhymesTests";
+			packageProductDependencies = (
+				D923B4E4257D83E1001C5760 /* SnapshotTesting */,
+			);
 			productName = "Nursery RhymesTests";
 			productReference = D923B4B6257D6E27001C5760 /* Nursery RhymesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -214,6 +227,11 @@
 				Base,
 			);
 			mainGroup = D923B497257D6E26001C5760;
+			packageReferences = (
+				D923B4E3257D83E1001C5760 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				D923B4E9257D842B001C5760 /* XCRemoteSwiftPackageReference "NurseryRhymesModels" */,
+				D923B4EF257D8461001C5760 /* XCRemoteSwiftPackageReference "NurseryRhymesConnection" */,
+			);
 			productRefGroup = D923B4A1257D6E26001C5760 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -589,6 +607,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D923B4E3257D83E1001C5760 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.2;
+			};
+		};
+		D923B4E9257D842B001C5760 /* XCRemoteSwiftPackageReference "NurseryRhymesModels" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:MaciejGad/NurseryRhymesModels.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		D923B4EF257D8461001C5760 /* XCRemoteSwiftPackageReference "NurseryRhymesConnection" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:MaciejGad/NurseryRhymesConnection.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D923B4E4257D83E1001C5760 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D923B4E3257D83E1001C5760 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+		D923B4EA257D842B001C5760 /* Models */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D923B4E9257D842B001C5760 /* XCRemoteSwiftPackageReference "NurseryRhymesModels" */;
+			productName = Models;
+		};
+		D923B4F0257D8461001C5760 /* Connection */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D923B4EF257D8461001C5760 /* XCRemoteSwiftPackageReference "NurseryRhymesConnection" */;
+			productName = Connection;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D923B498257D6E26001C5760 /* Project object */;
 }
