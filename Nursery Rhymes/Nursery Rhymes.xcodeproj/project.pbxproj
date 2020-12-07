@@ -17,6 +17,11 @@
 		D923B4E5257D83E1001C5760 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = D923B4E4257D83E1001C5760 /* SnapshotTesting */; };
 		D923B4EB257D842B001C5760 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = D923B4EA257D842B001C5760 /* Models */; };
 		D923B4F1257D8461001C5760 /* Connection in Frameworks */ = {isa = PBXBuildFile; productRef = D923B4F0257D8461001C5760 /* Connection */; };
+		D923B4F7257D8762001C5760 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B4F6257D8762001C5760 /* ListViewController.swift */; };
+		D923B4FF257D8805001C5760 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B4FE257D8805001C5760 /* ListView.swift */; };
+		D923B507257D8D93001C5760 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B506257D8D93001C5760 /* Preview.swift */; };
+		D923B50C257D948D001C5760 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B50B257D948D001C5760 /* LoaderView.swift */; };
+		D923B511257D9A59001C5760 /* NSLayoutConstraintHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B510257D9A59001C5760 /* NSLayoutConstraintHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +56,11 @@
 		D923B4C5257D6E27001C5760 /* Nursery_RhymesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nursery_RhymesUITests.swift; sourceTree = "<group>"; };
 		D923B4C7257D6E27001C5760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D923B4D9257D6E53001C5760 /* Nursery Rhymes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Nursery Rhymes.entitlements"; sourceTree = "<group>"; };
+		D923B4F6257D8762001C5760 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		D923B4FE257D8805001C5760 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		D923B506257D8D93001C5760 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		D923B50B257D948D001C5760 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
+		D923B510257D9A59001C5760 /* NSLayoutConstraintHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,9 +118,12 @@
 				D923B4A3257D6E26001C5760 /* AppDelegate.swift */,
 				D923B4A5257D6E26001C5760 /* SceneDelegate.swift */,
 				D923B4A7257D6E26001C5760 /* ViewController.swift */,
+				D923B4F5257D874A001C5760 /* List */,
 				D923B4AC257D6E27001C5760 /* Assets.xcassets */,
 				D923B4AE257D6E27001C5760 /* LaunchScreen.storyboard */,
 				D923B4B1257D6E27001C5760 /* Info.plist */,
+				D923B506257D8D93001C5760 /* Preview.swift */,
+				D923B510257D9A59001C5760 /* NSLayoutConstraintHelper.swift */,
 			);
 			path = "Nursery Rhymes";
 			sourceTree = "<group>";
@@ -131,6 +144,16 @@
 				D923B4C7257D6E27001C5760 /* Info.plist */,
 			);
 			path = "Nursery RhymesUITests";
+			sourceTree = "<group>";
+		};
+		D923B4F5257D874A001C5760 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				D923B4F6257D8762001C5760 /* ListViewController.swift */,
+				D923B4FE257D8805001C5760 /* ListView.swift */,
+				D923B50B257D948D001C5760 /* LoaderView.swift */,
+			);
+			path = List;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +299,11 @@
 			files = (
 				D923B4A8257D6E26001C5760 /* ViewController.swift in Sources */,
 				D923B4A4257D6E26001C5760 /* AppDelegate.swift in Sources */,
+				D923B4FF257D8805001C5760 /* ListView.swift in Sources */,
+				D923B50C257D948D001C5760 /* LoaderView.swift in Sources */,
+				D923B4F7257D8762001C5760 /* ListViewController.swift in Sources */,
+				D923B511257D9A59001C5760 /* NSLayoutConstraintHelper.swift in Sources */,
+				D923B507257D8D93001C5760 /* Preview.swift in Sources */,
 				D923B4A6257D6E26001C5760 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,7 +407,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG PREVIEW";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
