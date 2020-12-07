@@ -1,9 +1,8 @@
 import Foundation
 import UIKit
 
-final class LoaderView: UIView {
+final class ErrorView: UIView {
     let titleLabel = UILabel()
-    let loader = UIActivityIndicatorView(style: .large)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -13,13 +12,11 @@ final class LoaderView: UIView {
     private func setup() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
-        titleLabel.text = "Please wait. \nLoading..."
+        titleLabel.text = "Error loading"
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont(name: "Cochin", size: 16)
-        loader.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(loader)
-        loader.startAnimating()
+        titleLabel.textColor = .systemRed
         makeConstraints()
     }
     
@@ -28,9 +25,7 @@ final class LoaderView: UIView {
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            loader.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            loader.centerXAnchor.constraint(equalTo: centerXAnchor),
-            bottomAnchor.constraint(equalTo: loader.bottomAnchor, constant: 8)
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
@@ -45,14 +40,14 @@ final class LoaderView: UIView {
 #if PREVIEW && canImport(SwiftUI)
 import SwiftUI
 
-struct LoaderViewPreview: PreviewProvider {
+struct ErrorViewPreview: PreviewProvider {
     static var previews: some SwiftUI.View {
-        Group { 
-            LoaderView()
-                .previewSizeThatFits()
+        Group {
+            ErrorView()
+                .previewSizeThatFits(width: 150, border: true)
                 .preferredColorScheme(.light)
                 .previewDisplayName("Light mode")
-            LoaderView()
+            ErrorView()
                 .previewSizeThatFits()
                 .preferredColorScheme(.dark)
                 .previewDisplayName("Dark mode")

@@ -1,0 +1,19 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cd to subfolder
+      run: cd "Nursery Rhymes"
+    - name: Run tests
+      run: xcodebuild test -project Nursery\ Rhymes.xcodeproj -scheme NurseryRhymesTests -destination 'platform=iOS Simulator,name=iPhone 8'

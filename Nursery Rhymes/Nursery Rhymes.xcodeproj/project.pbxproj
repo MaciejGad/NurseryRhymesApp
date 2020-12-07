@@ -12,7 +12,6 @@
 		D923B4A8257D6E26001C5760 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B4A7257D6E26001C5760 /* ViewController.swift */; };
 		D923B4AD257D6E27001C5760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D923B4AC257D6E27001C5760 /* Assets.xcassets */; };
 		D923B4B0257D6E27001C5760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D923B4AE257D6E27001C5760 /* LaunchScreen.storyboard */; };
-		D923B4BB257D6E27001C5760 /* Nursery_RhymesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B4BA257D6E27001C5760 /* Nursery_RhymesTests.swift */; };
 		D923B4C6257D6E27001C5760 /* Nursery_RhymesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B4C5257D6E27001C5760 /* Nursery_RhymesUITests.swift */; };
 		D923B4E5257D83E1001C5760 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = D923B4E4257D83E1001C5760 /* SnapshotTesting */; };
 		D923B4EB257D842B001C5760 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = D923B4EA257D842B001C5760 /* Models */; };
@@ -22,6 +21,8 @@
 		D923B507257D8D93001C5760 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B506257D8D93001C5760 /* Preview.swift */; };
 		D923B50C257D948D001C5760 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B50B257D948D001C5760 /* LoaderView.swift */; };
 		D923B511257D9A59001C5760 /* NSLayoutConstraintHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B510257D9A59001C5760 /* NSLayoutConstraintHelper.swift */; };
+		D979A39A257E25C5001A366C /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D979A399257E25C5001A366C /* ErrorView.swift */; };
+		D979A39F257E2CC7001A366C /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D979A39E257E2CC7001A366C /* ListViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +51,6 @@
 		D923B4AF257D6E27001C5760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D923B4B1257D6E27001C5760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D923B4B6257D6E27001C5760 /* Nursery RhymesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nursery RhymesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D923B4BA257D6E27001C5760 /* Nursery_RhymesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nursery_RhymesTests.swift; sourceTree = "<group>"; };
 		D923B4BC257D6E27001C5760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D923B4C1257D6E27001C5760 /* Nursery RhymesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nursery RhymesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D923B4C5257D6E27001C5760 /* Nursery_RhymesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nursery_RhymesUITests.swift; sourceTree = "<group>"; };
@@ -61,6 +61,8 @@
 		D923B506257D8D93001C5760 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		D923B50B257D948D001C5760 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		D923B510257D9A59001C5760 /* NSLayoutConstraintHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintHelper.swift; sourceTree = "<group>"; };
+		D979A399257E25C5001A366C /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		D979A39E257E2CC7001A366C /* ListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +133,7 @@
 		D923B4B9257D6E27001C5760 /* Nursery RhymesTests */ = {
 			isa = PBXGroup;
 			children = (
-				D923B4BA257D6E27001C5760 /* Nursery_RhymesTests.swift */,
+				D979A39E257E2CC7001A366C /* ListViewControllerTests.swift */,
 				D923B4BC257D6E27001C5760 /* Info.plist */,
 			);
 			path = "Nursery RhymesTests";
@@ -152,6 +154,7 @@
 				D923B4F6257D8762001C5760 /* ListViewController.swift */,
 				D923B4FE257D8805001C5760 /* ListView.swift */,
 				D923B50B257D948D001C5760 /* LoaderView.swift */,
+				D979A399257E25C5001A366C /* ErrorView.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				D923B4F7257D8762001C5760 /* ListViewController.swift in Sources */,
 				D923B511257D9A59001C5760 /* NSLayoutConstraintHelper.swift in Sources */,
 				D923B507257D8D93001C5760 /* Preview.swift in Sources */,
+				D979A39A257E25C5001A366C /* ErrorView.swift in Sources */,
 				D923B4A6257D6E26001C5760 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,7 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D923B4BB257D6E27001C5760 /* Nursery_RhymesTests.swift in Sources */,
+				D979A39F257E2CC7001A366C /* ListViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
