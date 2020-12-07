@@ -13,5 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Fix Xcode error
+      run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts
     - name: Run tests
       run: cd "Nursery Rhymes" && xcodebuild test -project Nursery\ Rhymes.xcodeproj -scheme NurseryRhymesTests -destination 'platform=iOS Simulator,name=iPhone 8'
