@@ -15,5 +15,6 @@ jobs:
     - uses: actions/checkout@v2
     - run: sudo defaults write com.apple.dt.Xcode IDEPackageSupportUseBuiltinSCM YES
     - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
+    - run: ssh-add - <<< "${{ inputs.<secret_named> }}"
     - name: Run tests
       run: cd "Nursery Rhymes" && xcodebuild test -project Nursery\ Rhymes.xcodeproj -scheme NurseryRhymesTests -destination 'platform=iOS Simulator,name=iPhone 8'
