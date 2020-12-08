@@ -39,6 +39,7 @@ final class RhymeView: UIView {
     func showLoader() {
         errorView.isHidden = true
         loader.isHidden = false
+        bookListButton.isHidden = true
         loader.startAnimating()
     }
     
@@ -47,6 +48,7 @@ final class RhymeView: UIView {
         //In real-life app I should better format the error message to be more readable for user
         errorView.titleLabel.text = "Error: \(error.localizedDescription)"
         errorView.isHidden = false
+        bookListButton.isHidden = true
         refreshController.endRefreshing()
     }
     
@@ -54,6 +56,7 @@ final class RhymeView: UIView {
         errorView.isHidden = true
         loader.isHidden = true
         textLabel.text = model.text
+        bookListButton.isHidden = false
         refreshController.endRefreshing()
     }
     
@@ -113,6 +116,13 @@ final class RhymeView: UIView {
         textLabel.font = UIFont(name: "Cochin", size: 18)
         textLabel.textAlignment = .center
         errorView.isHidden = true
+        
+        bookListButton.isHidden = true
+        bookListButton.setTitle("Buy book with this rhyme", for: .normal)
+        bookListButton.setTitleColor(.systemOrange, for: .normal)
+        bookListButton.layer.borderWidth = 1
+        bookListButton.layer.borderColor = UIColor.systemOrange.cgColor
+        bookListButton.layer.cornerRadius = 4
         
         container.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(container)

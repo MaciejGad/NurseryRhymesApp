@@ -136,7 +136,7 @@ final class ListDataSource: ListDataSourceInput {
         )
     }
     
-    fileprivate class Delegate: NSObject, UITableViewDelegate {
+    private class Delegate: NSObject, UITableViewDelegate {
         weak var dataSource: TableViewDataSource?
         
         var didSelectRow: ((ListViewModel, IndexPath) -> Void)? = nil

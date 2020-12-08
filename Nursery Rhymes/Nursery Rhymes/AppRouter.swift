@@ -6,7 +6,8 @@ import Connection
 protocol AppRouterInput: class {
     func rootViewController() -> UIViewController
     func showRhyme(model: ListViewModel)
-    func showBookList(for rhymeId: Rhyme.ID)
+    func showBooks(list: [BookViewModel])
+    func showBookInBrowser(url: URL)
 }
 
 
@@ -52,16 +53,22 @@ final class AppRouter: AppRouterInput {
     }
     
     func showRhyme(model: ListViewModel) {
-        let factory = RhymeViewControllerFactory(singleRhymeProvider: detailsProvider, bookListProvider: bookListProvider, imageDownloader: imageDownloader, favouritesProvider: favouritesProvider)
+        let factory = RhymeViewControllerFactory(singleRhymeProvider: detailsProvider, bookListProvider: bookListProvider, imageDownloader: imageDownloader, favouritesProvider: favouritesProvider, appRouter: self)
         let vc = factory.makeViewController(viewModel: model)
         navigationController.pushViewController(vc, animated: true)
     }
     
     
-    func showBookList(for rhymeId: Rhyme.ID) {
-        
+    func showBooks(list: [BookViewModel]) {
+        let factory = BooksViewControllerFactory(appRouter: self)
+        let vc = factory.makeViewController(models: list)
+        let nc = NavigationController(rootViewController: vc)
+        navigationController.present(nc, animated: true)
     }
     
+    func showBookInBrowser(url: URL) {
+        
+    }
     
     private func makeNavigationController() -> UINavigationController {
         let listViewControllerFactory = ListViewControllerFactory(rhymeListProvider: listProvider, imageDownloader: imageDownloader, appRouter: self, favouritesProvider: favouritesProvider)

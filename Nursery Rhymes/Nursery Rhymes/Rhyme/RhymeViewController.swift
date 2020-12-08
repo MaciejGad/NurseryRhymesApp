@@ -6,19 +6,24 @@ final class RhymeViewController: UIViewController {
     private let viewModel: ListViewModel
     private let detailsProvider: RhymeDetailsProviderInput
     private let favouritesProvider: FavouritesProviderInput
-
+    private weak var appRouter: AppRouterInput?
+    
     private lazy var isFavourite: Bool = viewModel.isFavourite {
         didSet {
             onFavouriteUpdate()
         }
     }
     
+    private var detailsViewModel: RhymeDetailsViewModel?
+    
     init(viewModel: ListViewModel,
          detailsProvider: RhymeDetailsProviderInput,
-         favouritesProvider: FavouritesProviderInput) {
+         favouritesProvider: FavouritesProviderInput,
+         appRouter: AppRouterInput?) {
         self.viewModel = viewModel
         self.detailsProvider = detailsProvider
         self.favouritesProvider = favouritesProvider
+        self.appRouter = appRouter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,6 +36,7 @@ final class RhymeViewController: UIViewController {
         customView.render(model: viewModel)
         navigationItem.titleView = customView.header
         customView.refreshController.addTarget(self, action: #selector(onPullToRefresh), for: .valueChanged)
+        customView.bookListButton.addTarget(self, action: #selector(showBooks), for: .touchUpInside)
         onFavouriteUpdate()
     }
     
@@ -45,6 +51,7 @@ final class RhymeViewController: UIViewController {
             switch result {
             case .success(let model):
                 self?.customView.successLoading(model: model)
+                self?.detailsViewModel = model
             case .failure(let error):
                 self?.customView.showError(error: error)
             }
@@ -75,6 +82,13 @@ final class RhymeViewController: UIViewController {
     
     @IBAction func onPullToRefresh() {
         fetch()
+    }
+    
+    @IBAction func showBooks() {
+        guard let bookList = detailsViewModel?.books else {
+            return
+        }
+        appRouter?.showBooks(list: bookList)
     }
     
     @available(*, unavailable, message: "init(coder:) has not been implemented, use init(dataSource:) intead")
