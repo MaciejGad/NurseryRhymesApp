@@ -6,9 +6,11 @@ import Connection
 final class ListViewController: UIViewController {
     private lazy var customView = ListView()
     private let dataSource: ListDataSourceInput
+    private weak var appRouter: AppRouterInput?
     
-    init(dataSource: ListDataSourceInput) {
+    init(dataSource: ListDataSourceInput, appRouter: AppRouterInput?) {
         self.dataSource = dataSource
+        self.appRouter = appRouter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -22,8 +24,8 @@ final class ListViewController: UIViewController {
         navigationItem.titleView = customView.header
         dataSource.setup(tableView: customView.tableView)
         customView.refreshController.addTarget(self, action: #selector(onPullToRefresh), for: .valueChanged)
-        dataSource.didSelectRow = { item, _ in
-            self.navigationController?.pushViewController(RhymeViewController(viewModel: item), animated: true)
+        dataSource.didSelectRow = {[weak self] item, _ in
+            self?.appRouter?.showRhyme(model: item)
         }
     }
     
@@ -75,13 +77,13 @@ class ListDataSourceDummy: ListDataSourceInput {
 struct ListViewControllerPreview: PreviewProvider {
     static var previews: some SwiftUI.View {
         Group {
-            ListViewController(dataSource: ListDataSourceDummy())
+            ListViewController(dataSource: ListDataSourceDummy(), appRouter: nil)
                 .previewInNavigationController()
                 .previewLayout(.sizeThatFits)
                 .preferredColorScheme(.light)
                 .previewDisplayName("Light mode")
             
-            ListViewController(dataSource: ListDataSourceDummy())
+            ListViewController(dataSource: ListDataSourceDummy(), appRouter: nil)
                 .previewInNavigationController()
                 .previewLayout(.sizeThatFits)
                 .preferredColorScheme(.dark)

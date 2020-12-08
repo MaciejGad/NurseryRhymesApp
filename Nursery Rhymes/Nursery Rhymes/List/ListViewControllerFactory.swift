@@ -3,11 +3,18 @@ import Models
 import Connection
 
 final class ListViewControllerFactory {
+    let rhymeListProvider: RhymeListProviderInput
+    let imageDownloader: ImageDownloaderInput
+    let appRouter: AppRouterInput
+    
+    init(rhymeListProvider: RhymeListProviderInput, imageDownloader: ImageDownloaderInput, appRouter: AppRouterInput) {
+        self.rhymeListProvider = rhymeListProvider
+        self.imageDownloader = imageDownloader
+        self.appRouter = appRouter
+    }
     
     func makeViewController() -> ListViewController {
-        let listProvider = RhymeListProvider(baseURL: URL(string: "https://maciejgad.github.io/NurseryRhymesJSON/data/")!)
-        let imageDownloader = ImageDownloader(baseURL: URL(string: "https://maciejgad.github.io/NurseryRhymesJSON/images/")!)
-        let dataSource = ListDataSource(rhymeListProvider: listProvider, imageDownloader: imageDownloader)
-        return ListViewController(dataSource: dataSource)
+        let dataSource = ListDataSource(rhymeListProvider: rhymeListProvider, imageDownloader: imageDownloader)
+        return ListViewController(dataSource: dataSource, appRouter: appRouter)
     }
 }
