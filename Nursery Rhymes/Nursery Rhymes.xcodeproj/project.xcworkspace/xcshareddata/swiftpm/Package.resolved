@@ -6,7 +6,7 @@
         "repositoryURL": "git@github.com:MaciejGad/NurseryRhymesConnection.git",
         "state": {
           "branch": "main",
-          "revision": "86a5755c217900c6645d58a53d57a4b378728e85",
+          "revision": "8d059d246b5fa1f7cd4e43048d1c510cc5773e22",
           "version": null
         }
       },
@@ -15,7 +15,7 @@
         "repositoryURL": "git@github.com:MaciejGad/NurseryRhymesModels.git",
         "state": {
           "branch": "main",
-          "revision": "7343b782eec40f3071d9afebeedeaf211a9e9929",
+          "revision": "ab32808775f6f1d92c3764c47e9bafd4d55c478f",
           "version": null
         }
       },

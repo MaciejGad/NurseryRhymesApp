@@ -13,17 +13,32 @@ protocol AppRouterInput: class {
 final class AppRouter: AppRouterInput {
     
     let listProvider: RhymeListProviderInput
+    let detailsProvider: SingleRhymeProviderInput
+    let bookListProvider: BookListForRhymeProviderInput
     let imageDownloader: ImageDownloaderInput
     
-    init(listProvider: RhymeListProviderInput, imageDownloader: ImageDownloaderInput) {
+    init(listProvider: RhymeListProviderInput,
+         detailsProvider: SingleRhymeProviderInput,
+         bookListProvider: BookListForRhymeProviderInput,
+         imageDownloader: ImageDownloaderInput) {
         self.listProvider = listProvider
+        self.detailsProvider = detailsProvider
+        self.bookListProvider = bookListProvider
         self.imageDownloader = imageDownloader
     }
     
     convenience init() {
+        guard let baseJsonURL = URL(string: "https://maciejgad.github.io/NurseryRhymesJSON/data/") else {
+            fatalError("Wrong base url!")
+        }
+        guard let baseImageURL = URL(string: "https://maciejgad.github.io/NurseryRhymesJSON/images/") else {
+            fatalError("Wrong base url!")
+        }
         self.init(
-            listProvider: RhymeListProvider(baseURL: URL(string: "https://maciejgad.github.io/NurseryRhymesJSON/data/")!),
-            imageDownloader: ImageDownloader(baseURL: URL(string: "https://maciejgad.github.io/NurseryRhymesJSON/images/")!))
+            listProvider: RhymeListProvider(baseURL: baseJsonURL),
+            detailsProvider: SingleRhymeProvider(baseURL: baseJsonURL),
+            bookListProvider: BookListForRhymeProvider(baseURL: baseJsonURL),
+            imageDownloader: ImageDownloader(baseURL: baseImageURL))
         
     }
     lazy var navigationController = makeNavigationController()
@@ -33,7 +48,7 @@ final class AppRouter: AppRouterInput {
     }
     
     func showRhyme(model: ListViewModel) {
-        let factory = RhymeViewControllerFactory()
+        let factory = RhymeViewControllerFactory(singleRhymeProvider: detailsProvider, bookListProvider: bookListProvider, imageDownloader: imageDownloader)
         let vc = factory.makeViewController(viewModel: model)
         navigationController.pushViewController(vc, animated: true)
     }

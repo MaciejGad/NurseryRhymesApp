@@ -49,9 +49,10 @@ final class RhymeView: UIView {
         refreshController.endRefreshing()
     }
     
-    func successLoading() {
+    func successLoading(model: RhymeDetailsViewModel) {
         errorView.isHidden = true
         loader.isHidden = true
+        textLabel.text = model.text
         refreshController.endRefreshing()
     }
     
@@ -95,10 +96,11 @@ final class RhymeView: UIView {
             UIView()
         ])
         container.axis = .vertical
-        container.spacing = 4
+        container.spacing = 12
         coverImageView.contentMode = .scaleAspectFill
         coverImageView.clipsToBounds = true
         coverImageView.tintColor = .systemOrange
+        coverImageView.layer.cornerRadius = 4
         
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont(name: "Cochin", size: 18)
@@ -106,6 +108,9 @@ final class RhymeView: UIView {
         authorLabel.font = UIFont(name: "Cochin", size: 15)
         authorLabel.textColor = .systemGreen
         
+        textLabel.numberOfLines = 0
+        textLabel.font = UIFont(name: "Cochin", size: 16)
+        textLabel.textAlignment = .center
         errorView.isHidden = true
         
         container.translatesAutoresizingMaskIntoConstraints = false
@@ -119,11 +124,11 @@ final class RhymeView: UIView {
     private func makeConstraints(container: UIStackView) {
         let additionalConstraints = [
             container.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -16),
-            container.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor, constant: -63),
+            container.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor, constant: 0),
             coverImageView.heightAnchor.constraint(equalTo: coverImageView.widthAnchor, multiplier: 0.5)
         ]
         let constraints = [
-            scrollView.pinToSuperview(),
+            scrollView.pinToSuperview(safeArea: true),
             container.pinToSuperview(margin: .init(top: 0, left: 8, bottom: 0, right: 8)),
             additionalConstraints
         ].flatMap { $0 }

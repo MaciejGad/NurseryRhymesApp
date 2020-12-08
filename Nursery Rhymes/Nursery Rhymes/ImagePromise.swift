@@ -32,6 +32,17 @@ class ImagePromise: ImagePromiseInput {
     }
 }
 
+extension Optional where Wrapped == URL {
+    func asImagePromise(downloader: ImageDownloaderInput) -> ImagePromise? {
+        switch self {
+        case .some(let url):
+            return ImagePromise(url: url, downloader: downloader)
+        case .none:
+            return nil
+        }
+    }
+}
+
 #if DEBUG
 
 class ImagePromiseMock: ImagePromiseInput {
