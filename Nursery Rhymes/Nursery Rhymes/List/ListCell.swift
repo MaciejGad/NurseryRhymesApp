@@ -3,13 +3,6 @@ import UIKit
 import Models
 import Connection
 
-struct ListCellViewModel {
-    let id: Rhyme.ID
-    let title: String
-    let author: String?
-    let image: ImagePromiseInput
-    let isFavourite: Bool
-}
 
 final class ListCell: UITableViewCell {
     private let titleLabel = UILabel()
@@ -19,6 +12,8 @@ final class ListCell: UITableViewCell {
 
     private var imageDownloadTask: Task? = nil
     private var rhymeId: Rhyme.ID? = nil
+    
+    static var cellReuseIdentifier = "ListCell"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,21 +39,29 @@ final class ListCell: UITableViewCell {
         downloadImage(promise: model.image, modelId: model.id)
     }
     
-    private func downloadImage(promise: ImagePromiseInput, modelId: Rhyme.ID) {
-        imageDownloadTask = promise.fetch {[ weak self] result in
+    private func downloadImage(promise: ImagePromiseInput?, modelId: Rhyme.ID) {
+        showFallback()
+        imageDownloadTask = promise?.fetch {[ weak self] result in
+            defer {
+                self?.imageDownloadTask = nil
+            }
             guard let id = self?.rhymeId, modelId == id else {
                 return
             }
-            switch result {
-            case .success(let image):
-                self?.coverImageView.contentMode = .scaleAspectFill
-                self?.coverImageView.image = image
-            case .failure:
-                self?.coverImageView.contentMode = .scaleAspectFit
-                self?.coverImageView.image = UIImage(systemName: "book.fill")
+            if case let .success(image) = result {
+                self?.show(image: image)
             }
-            self?.imageDownloadTask = nil
         }
+    }
+    
+    private func show(image: UIImage) {
+        coverImageView.contentMode = .scaleAspectFill
+        coverImageView.image = image
+    }
+    
+    private func showFallback() {
+        coverImageView.contentMode = .scaleAspectFit
+        coverImageView.image = UIImage(systemName: "book.fill")
     }
     
     override func prepareForReuse() {
@@ -67,6 +70,14 @@ final class ListCell: UITableViewCell {
     }
     
     private func setup() {
+        coverImageView.translatesAutoresizingMaskIntoConstraints = false
+        coverImageView.contentMode = .scaleAspectFill
+        coverImageView.clipsToBounds = true
+        coverImageView.tintColor = .systemOrange
+        coverImageView.layer.cornerRadius = 4
+        contentView.addSubview(coverImageView)
+        
+        
         let titleStack = UIStackView(arrangedSubviews: [
             titleLabel,
             authorLabel
@@ -76,35 +87,41 @@ final class ListCell: UITableViewCell {
         authorLabel.numberOfLines = 0
         authorLabel.font = UIFont(name: "Cochin", size: 15)
         authorLabel.textColor = .systemGreen
-        
         titleStack.axis = .vertical
         titleStack.spacing = 2
-        let stack = UIStackView(arrangedSubviews: [
-            coverImageView,
-            titleStack,
-            favouriteView
-        ])
-        coverImageView.contentMode = .scaleAspectFill
-        coverImageView.clipsToBounds = true
-        coverImageView.tintColor = .systemOrange
+        titleStack.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(titleStack)
+        
+        favouriteView.translatesAutoresizingMaskIntoConstraints = false
         favouriteView.contentMode = .center
         favouriteView.tintColor = .systemRed
-        stack.spacing = 12
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(stack)
-        makeConstraints(body: stack)
+        contentView.addSubview(favouriteView)
+        makeConstraints(titleStack: titleStack)
     }
     
-    private func makeConstraints(body: UIStackView) {
+    private func makeConstraints(titleStack: UIStackView) {
         NSLayoutConstraint.activate([
-            body.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            body.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            body.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            body.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
-            coverImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2),
-            favouriteView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2),
+            
+            //coverImageView
+            coverImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            coverImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            coverImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -4),
+            coverImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2),
+            coverImageView.heightAnchor.constraint(equalToConstant: 100),
+            
+            //titleStack
+            titleStack.leadingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: 8),
+            titleStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            titleStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            
+            //favouriteView
+            favouriteView.leadingAnchor.constraint(equalTo: titleStack.trailingAnchor, constant: 8),
+            favouriteView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            favouriteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            favouriteView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.15),
             favouriteView.widthAnchor.constraint(equalTo: favouriteView.heightAnchor),
-            coverImageView.widthAnchor.constraint(equalTo: coverImageView.heightAnchor),
+            
+            
         ])
     }
     
@@ -131,7 +148,7 @@ struct ListCellPreview: PreviewProvider {
         let failure = ImagePromiseMock(failure: .emptyResponse)
         
         let listCell = self.cell(image: promise, author: "Maciej Gad")
-        let listCell2 = self.cell(image: failure, isFavourite: false, author: "Maciej Gad")
+        let listCell2 = self.cell(image: failure, isFavourite: false)
         
         return Group {
             listCell

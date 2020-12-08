@@ -22,8 +22,9 @@ final class ListView: UIView {
     func showError(error: Error) {
         loaderView.isHidden = true
         //In real-life app I should better format the error message to be more readable for user
-        errorView.titleLabel.text = "Error: \(error)"
+        errorView.titleLabel.text = "Error: \(error.localizedDescription)"
         errorView.isHidden = false
+        refreshController.endRefreshing()
     }
     
     func successLoading() {
@@ -61,6 +62,7 @@ final class ListView: UIView {
             loaderView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -50),
             errorView.centerXAnchor.constraint(equalTo: centerXAnchor),
             errorView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -50),
+            errorView.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.4)
         ])
     }
     
