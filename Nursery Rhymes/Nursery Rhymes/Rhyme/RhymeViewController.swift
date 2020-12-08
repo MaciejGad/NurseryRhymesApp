@@ -7,7 +7,7 @@ final class RhymeViewController: UIViewController {
     private let detailsProvider: RhymeDetailsProviderInput
     private let favouritesProvider: FavouritesProviderInput
 
-    private var isFavourite: Bool? = nil {
+    private lazy var isFavourite: Bool = viewModel.isFavourite {
         didSet {
             onFavouriteUpdate()
         }
@@ -31,6 +31,7 @@ final class RhymeViewController: UIViewController {
         customView.render(model: viewModel)
         navigationItem.titleView = customView.header
         customView.refreshController.addTarget(self, action: #selector(onPullToRefresh), for: .valueChanged)
+        onFavouriteUpdate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +41,7 @@ final class RhymeViewController: UIViewController {
     }
     
     private func fetch() {
-        detailsProvider.fetch(id: viewModel.id) { [weak self] result in
+        detailsProvider.fetch(listViewModel: viewModel) { [weak self] result in
             switch result {
             case .success(let model):
                 self?.customView.successLoading(model: model)
@@ -48,15 +49,9 @@ final class RhymeViewController: UIViewController {
                 self?.customView.showError(error: error)
             }
         }
-        favouritesProvider.isFavourite(id: viewModel.id) {[weak self] isFavourite in
-            self?.isFavourite = isFavourite
-        }
     }
     
     @IBAction func toggleFavourite() {
-        guard let isFavourite = self.isFavourite else {
-            return
-        }
         if isFavourite {
             favouritesProvider.removeFromFavourites(id: viewModel.id) {[weak self] (error) in
                 if error != nil {
@@ -70,14 +65,10 @@ final class RhymeViewController: UIViewController {
                 }
             }
         }
-        self.isFavourite?.toggle()
+        isFavourite.toggle()
     }
     
     private func onFavouriteUpdate() {
-        guard let isFavourite = self.isFavourite else {
-            navigationItem.rightBarButtonItem = nil
-            return
-        }
         let image = UIImage(systemName: isFavourite ? "heart.fill" : "heart")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(toggleFavourite))
     }

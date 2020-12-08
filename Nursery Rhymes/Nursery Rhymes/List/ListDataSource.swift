@@ -10,6 +10,7 @@ protocol ListDataSourceInput: class {
     var didSelectRow: ((ListViewModel, IndexPath) -> Void)? { get set }
     func setup(tableView: UITableView)
     func fetch(complete: @escaping (Error?) -> Void)
+    func filter(favouritesOnly: Bool)
 }
 
 final class ListDataSource: ListDataSourceInput {
@@ -24,6 +25,10 @@ final class ListDataSource: ListDataSourceInput {
     let rhymeListProvider: RhymeListProviderInput
     let imageDownloader: ImageDownloaderInput
     let favouritesProvider: FavouritesProviderInput
+    
+    private var list: List? = nil
+    private var favourites: FavouritesList? = nil
+    private var favouritesOnly: Bool = false
     
     var didSelectRow: ((ListViewModel, IndexPath) -> Void)? = nil {
         didSet {
@@ -77,17 +82,33 @@ final class ListDataSource: ListDataSourceInput {
             aggregator.aResult = result
         }
         
-        favouritesProvider.load { (list) in
-            aggregator.bResult = .success(list)
+        favouritesProvider.load {[weak self] (favourites) in
+            if let list = self?.list {
+                self?.handle(list: list, favourites: favourites)
+            }
+            aggregator.bResult = .success(favourites)
+        }
+    }
+    
+    func filter(favouritesOnly: Bool) {
+        self.favouritesOnly = favouritesOnly
+        if let list = list, let favourites = favourites {
+            handle(list: list, favourites: favourites)
         }
     }
     
     private func handle(list: List, favourites: FavouritesList) {
+        self.list = list
+        self.favourites = favourites
+        
         var snapshot = NSDiffableDataSourceSnapshot<Section, ListViewModel>()
 
         let viewModels = list.results.map {
             $0.toListCellViewModel(isFavourite: favourites.contains($0.id), imageDownloader: self.imageDownloader)
+        }.filter {
+            self.favouritesOnly ? $0.isFavourite : true
         }
+        
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(viewModels, toSection: .rhymes)
         dataSource?.apply(snapshot, animatingDifferences: true)

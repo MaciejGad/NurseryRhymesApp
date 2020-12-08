@@ -8,6 +8,12 @@ final class ListViewController: UIViewController {
     private let dataSource: ListDataSourceInput
     private weak var appRouter: AppRouterInput?
     
+    private var favouritesOnly: Bool = false {
+        didSet {
+            onFavouritesOnlyUpdate()
+        }
+    }
+    
     init(dataSource: ListDataSourceInput, appRouter: AppRouterInput?) {
         self.dataSource = dataSource
         self.appRouter = appRouter
@@ -43,8 +49,23 @@ final class ListViewController: UIViewController {
                 self?.customView.showError(error: error)
             } else {
                 self?.customView.successLoading()
+                self?.setupFavouritesOnlyButton()
             }
         }
+    }
+    
+    func onFavouritesOnlyUpdate() {
+        dataSource.filter(favouritesOnly: favouritesOnly)
+        setupFavouritesOnlyButton()
+    }
+    
+    func setupFavouritesOnlyButton() {
+        let image = UIImage(systemName: favouritesOnly ? "heart.circle.fill" : "heart.circle")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(toggleFavouritesOnly))
+    }
+    
+    @IBAction func toggleFavouritesOnly() {
+        favouritesOnly.toggle()
     }
     
     @IBAction func onPullToRefresh() {
@@ -62,18 +83,12 @@ final class ListViewController: UIViewController {
 import SwiftUI
 
 class ListDataSourceDummy: ListDataSourceInput {
-    
-    
     var didSelectRow: ((ListViewModel, IndexPath) -> Void)? = nil
-    
     let isEmpty: Bool = true
     
     func setup(tableView: UITableView) {}
-    
-    func fetch(complete: @escaping (Error?) -> Void) {
-    }
-    
-    
+    func fetch(complete: @escaping (Error?) -> Void) {}
+    func filter(favouritesOnly: Bool) {}
 }
 
 struct ListViewControllerPreview: PreviewProvider {

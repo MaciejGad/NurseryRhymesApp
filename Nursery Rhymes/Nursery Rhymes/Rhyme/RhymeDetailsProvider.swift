@@ -3,7 +3,7 @@ import Models
 import Connection
 
 protocol RhymeDetailsProviderInput {
-    func fetch(id: Rhyme.ID, completion: @escaping (Result<RhymeDetailsViewModel, ConnectionError>) -> Void)
+    func fetch(listViewModel: ListViewModel, completion: @escaping (Result<RhymeDetailsViewModel, ConnectionError>) -> Void)
 }
 
 final class RhymeDetailsProvider: RhymeDetailsProviderInput {
@@ -19,28 +19,28 @@ final class RhymeDetailsProvider: RhymeDetailsProviderInput {
         self.imageDownloader = imageDownloader
     }
     
-    func fetch(id: Rhyme.ID, completion: @escaping (Result<RhymeDetailsViewModel, ConnectionError>) -> Void) {
+    func fetch(listViewModel: ListViewModel, completion: @escaping (Result<RhymeDetailsViewModel, ConnectionError>) -> Void) {
+        let image = listViewModel.image
         let aggregator = Aggregator<Rhyme, BookListForRhyme, ConnectionError> { [weak self] (result) in
             guard let stronSelf = self else { return }
             switch result {
             case .success((let rhyme, let bookList)):
-                let model = stronSelf.createViewModel(rhyme: rhyme, bookList: bookList)
+                let model = stronSelf.createViewModel(rhyme: rhyme, bookList: bookList, image: image)
                 completion(.success(model))
             case .failure(let error):
-                print(error)
                 completion(.failure(error))
             }
         }
-        singleRhymeProvider.fetch(id: id) { result in
+        singleRhymeProvider.fetch(id: listViewModel.id) { result in
             aggregator.aResult = result
         }
-        bookListProvider.fetch(id: id) { result in
+        bookListProvider.fetch(id: listViewModel.id) { result in
             aggregator.bResult = result
         }
     }
     
-    private func createViewModel(rhyme: Rhyme, bookList: BookListForRhyme) -> RhymeDetailsViewModel {
-        let imagePromise = rhyme.image.asImagePromise(downloader: imageDownloader)
+    private func createViewModel(rhyme: Rhyme, bookList: BookListForRhyme, image: ImagePromiseInput?) -> RhymeDetailsViewModel {
+        let imagePromise = image ?? rhyme.image.asImagePromise(downloader: imageDownloader)
         let books = bookList.toBookViewModels(imageDownloader: imageDownloader)
         return .init(title: rhyme.title, author: rhyme.author, image: imagePromise, text: rhyme.text, books: books)
     }

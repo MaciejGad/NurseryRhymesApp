@@ -23,7 +23,9 @@ class FavouritesProvider: FavouritesProviderInput {
     
     func load(completion: @escaping (FavouritesList) -> Void) {
         if let localFavouritesList = self.favouritesList {
-            completion(localFavouritesList)
+            DispatchQueue.main.async {
+                completion(localFavouritesList)
+            }
             return
         }
         localDataProvider.data(filename: filename) { [weak self] result in
