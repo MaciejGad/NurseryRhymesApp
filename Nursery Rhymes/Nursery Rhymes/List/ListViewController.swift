@@ -18,9 +18,13 @@ final class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = ""
         navigationItem.titleView = customView.header
         dataSource.setup(tableView: customView.tableView)
         customView.refreshController.addTarget(self, action: #selector(onPullToRefresh), for: .valueChanged)
+        dataSource.didSelectRow = { item, _ in
+            self.navigationController?.pushViewController(RhymeViewController(viewModel: item), animated: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +59,9 @@ final class ListViewController: UIViewController {
 #if PREVIEW && canImport(SwiftUI)
 import SwiftUI
 
-struct ListDataSourceDummy: ListDataSourceInput {
+class ListDataSourceDummy: ListDataSourceInput {
+    var didSelectRow: ((ListViewModel, IndexPath) -> Void)? = nil
+    
     let isEmpty: Bool = true
     
     func setup(tableView: UITableView) {}

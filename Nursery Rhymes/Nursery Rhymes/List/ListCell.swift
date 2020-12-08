@@ -20,7 +20,7 @@ final class ListCell: UITableViewCell {
         setup()
     }
     
-    func render(model: ListCellViewModel) {
+    func render(model: ListViewModel) {
         rhymeId = model.id
         titleLabel.text = model.title
         if let author = model.author {
@@ -138,7 +138,7 @@ struct ListCellPreview: PreviewProvider {
     static func cell(image: ImagePromiseInput, isFavourite: Bool = true, author: String? = nil) -> ListCell {
         let cell = ListCell()
         
-        let model = ListCellViewModel(id: "123", title: "This is a test", author: author, image: image, isFavourite: isFavourite)
+        let model = ListViewModel(id: "123", title: "This is a test", author: author, image: image, isFavourite: isFavourite)
         cell.render(model: model)
         return cell
     }

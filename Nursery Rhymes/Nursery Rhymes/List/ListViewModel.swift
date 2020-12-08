@@ -36,3 +36,4 @@ extension ListViewModel: Hashable {
         hasher.combine(isFavourite)
     }
 }
+

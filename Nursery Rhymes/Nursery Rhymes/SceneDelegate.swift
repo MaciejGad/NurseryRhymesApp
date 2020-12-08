@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var navigationController: UINavigationController?
+    var navigationController: NavigationController?
     lazy var listViewControllerFactory = ListViewControllerFactory()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -20,7 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        let rootViewController = UINavigationController(rootViewController: listViewControllerFactory.makeViewController())
+        window?.tintColor = .systemOrange
+        let rootViewController = NavigationController(rootViewController: listViewControllerFactory.makeViewController())
         window?.windowScene = windowScene
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()

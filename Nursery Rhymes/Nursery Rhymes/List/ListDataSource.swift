@@ -3,10 +3,11 @@ import Models
 import Connection
 import UIKit
 
-fileprivate typealias TableViewDataSource = UITableViewDiffableDataSource<ListDataSource.Section, ListCellViewModel>
+fileprivate typealias TableViewDataSource = UITableViewDiffableDataSource<ListDataSource.Section, ListViewModel>
 
-protocol ListDataSourceInput {
+protocol ListDataSourceInput: class {
     var isEmpty: Bool { get }
+    var didSelectRow: ((ListViewModel, IndexPath) -> Void)? { get set }
     func setup(tableView: UITableView)
     func fetch(complete: @escaping (Result<List, ConnectionError>) -> Void)
 }
@@ -18,9 +19,16 @@ final class ListDataSource: ListDataSourceInput {
     
     private var dataSource: TableViewDataSource?
     private var tableView: UITableView?
+    private var tableDelegate: Delegate?
     
     let rhymeListProvider: RhymeListProviderInput
     let imageDownloader: ImageDownloaderInput
+    
+    var didSelectRow: ((ListViewModel, IndexPath) -> Void)? = nil {
+        didSet {
+            tableDelegate?.didSelectRow = didSelectRow
+        }
+    }
     
     var isEmpty: Bool {
         guard let dataSource = dataSource else {
@@ -41,8 +49,12 @@ final class ListDataSource: ListDataSourceInput {
         tableView.estimatedRowHeight = 85
         
         self.tableView = tableView
-        self.dataSource = makeDataSource()
+        dataSource = makeDataSource()
+        tableDelegate = Delegate(dataSource: dataSource)
+        tableDelegate?.didSelectRow = didSelectRow
+        
         tableView.dataSource = dataSource
+        tableView.delegate = tableDelegate
     }
     
     func fetch(complete: @escaping (Result<List, ConnectionError>) -> Void) {
@@ -55,7 +67,7 @@ final class ListDataSource: ListDataSourceInput {
     }
     
     private func handle(success list: List) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, ListCellViewModel>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, ListViewModel>()
 
         let viewModels = list.results.map {
             $0.toListCellViewModel(isFavourite: false, imageDownloader: self.imageDownloader)
@@ -86,11 +98,34 @@ final class ListDataSource: ListDataSourceInput {
             }
         )
     }
+    
+    fileprivate class Delegate: NSObject, UITableViewDelegate {
+        weak var dataSource: TableViewDataSource?
+        
+        var didSelectRow: ((ListViewModel, IndexPath) -> Void)? = nil
+        
+        init(dataSource: TableViewDataSource?) {
+            self.dataSource = dataSource
+        }
+        
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            tableView.deselectRow(at: indexPath, animated: true)
+            guard let dataSource = dataSource else {
+                return
+            }
+            guard let item = dataSource.itemIdentifier(for: indexPath) else {
+                return
+            }
+            didSelectRow?(item, indexPath)
+        }
+    }
 }
 
+
+
 extension ListItem {
-    fileprivate func toListCellViewModel(isFavourite: Bool, imageDownloader: ImageDownloaderInput) -> ListCellViewModel {
-        ListCellViewModel(id: id,
+    fileprivate func toListCellViewModel(isFavourite: Bool, imageDownloader: ImageDownloaderInput) -> ListViewModel {
+        ListViewModel(id: id,
                           title: title,
                           author: author,
                           image: image.flatMap { ImagePromise(url: $0, downloader: imageDownloader) },
