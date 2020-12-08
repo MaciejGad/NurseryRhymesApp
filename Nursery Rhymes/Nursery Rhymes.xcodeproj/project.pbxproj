@@ -36,6 +36,8 @@
 		D9A08903257FAA280079079F /* RhymeDetailsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A08902257FAA280079079F /* RhymeDetailsProvider.swift */; };
 		D9A08908257FAA880079079F /* RhymeDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A08907257FAA880079079F /* RhymeDetailsViewModel.swift */; };
 		D9A0890D257FE0CE0079079F /* Aggregator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A0890C257FE0CE0079079F /* Aggregator.swift */; };
+		D9A0891525801BFE0079079F /* FavouritesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A0891425801BFE0079079F /* FavouritesProvider.swift */; };
+		D9A0891A25801D8E0079079F /* LocalDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A0891925801D8E0079079F /* LocalDataProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		D9A08902257FAA280079079F /* RhymeDetailsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymeDetailsProvider.swift; sourceTree = "<group>"; };
 		D9A08907257FAA880079079F /* RhymeDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymeDetailsViewModel.swift; sourceTree = "<group>"; };
 		D9A0890C257FE0CE0079079F /* Aggregator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aggregator.swift; sourceTree = "<group>"; };
+		D9A0891425801BFE0079079F /* FavouritesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesProvider.swift; sourceTree = "<group>"; };
+		D9A0891925801D8E0079079F /* LocalDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +161,7 @@
 				D9A088DB257F67600079079F /* NavigationController.swift */,
 				D9A088F3257F6FB10079079F /* UIView+pinToSuperview.swift */,
 				D9A0890C257FE0CE0079079F /* Aggregator.swift */,
+				D9A0891925801D8E0079079F /* LocalDataProvider.swift */,
 			);
 			path = "Nursery Rhymes";
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 				D9A088D6257EF65E0079079F /* ListViewModel.swift */,
 				D979A3A6257E413D001A366C /* ListDataSource.swift */,
 				D979A399257E25C5001A366C /* ErrorView.swift */,
+				D9A0891425801BFE0079079F /* FavouritesProvider.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -357,8 +363,10 @@
 				D9A088CF257EE72E0079079F /* ListViewControllerFactory.swift in Sources */,
 				D9A088F4257F6FB10079079F /* UIView+pinToSuperview.swift in Sources */,
 				D9A088DC257F67600079079F /* NavigationController.swift in Sources */,
+				D9A0891A25801D8E0079079F /* LocalDataProvider.swift in Sources */,
 				D923B4F7257D8762001C5760 /* ListViewController.swift in Sources */,
 				D979A3AC257E49A9001A366C /* ListCell.swift in Sources */,
+				D9A0891525801BFE0079079F /* FavouritesProvider.swift in Sources */,
 				D923B511257D9A59001C5760 /* NSLayoutConstraintHelper.swift in Sources */,
 				D9A088EA257F68580079079F /* RhymeView.swift in Sources */,
 				D923B507257D8D93001C5760 /* Preview.swift in Sources */,

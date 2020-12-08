@@ -5,6 +5,7 @@ import Connection
 
 final class RhymeView: UIView {
     let header = UILabel()
+    
     let coverImageView = UIImageView()
     let titleLabel = UILabel()
     let authorLabel = UILabel()
@@ -81,7 +82,7 @@ final class RhymeView: UIView {
     private func setup() {
         backgroundColor = .systemBackground
         header.translatesAutoresizingMaskIntoConstraints = false
-        header.font = UIFont(name: "Zapfino", size: 10)
+        header.font = UIFont(name: "Zapfino", size: 9)
         header.textAlignment = .center
         header.textColor = .systemOrange
         
@@ -103,13 +104,13 @@ final class RhymeView: UIView {
         coverImageView.layer.cornerRadius = 4
         
         titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont(name: "Cochin", size: 18)
+        titleLabel.font = UIFont(name: "Cochin", size: 20)
         authorLabel.numberOfLines = 0
         authorLabel.font = UIFont(name: "Cochin", size: 15)
         authorLabel.textColor = .systemGreen
         
         textLabel.numberOfLines = 0
-        textLabel.font = UIFont(name: "Cochin", size: 16)
+        textLabel.font = UIFont(name: "Cochin", size: 18)
         textLabel.textAlignment = .center
         errorView.isHidden = true
         
@@ -162,7 +163,7 @@ struct RhymeViewPreview: PreviewProvider {
         
         let view1 = self.view(image: promise, author: "Maciej Gad")
         let view2 = self.view(image: failure)
-        Group {
+        return Group {
             view1
                 .preview()
                 .previewLayout(.sizeThatFits)

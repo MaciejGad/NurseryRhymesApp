@@ -16,15 +16,18 @@ final class AppRouter: AppRouterInput {
     let detailsProvider: SingleRhymeProviderInput
     let bookListProvider: BookListForRhymeProviderInput
     let imageDownloader: ImageDownloaderInput
+    let favouritesProvider: FavouritesProviderInput
     
     init(listProvider: RhymeListProviderInput,
          detailsProvider: SingleRhymeProviderInput,
          bookListProvider: BookListForRhymeProviderInput,
-         imageDownloader: ImageDownloaderInput) {
+         imageDownloader: ImageDownloaderInput,
+         favouritesProvider: FavouritesProviderInput) {
         self.listProvider = listProvider
         self.detailsProvider = detailsProvider
         self.bookListProvider = bookListProvider
         self.imageDownloader = imageDownloader
+        self.favouritesProvider = favouritesProvider
     }
     
     convenience init() {
@@ -38,7 +41,8 @@ final class AppRouter: AppRouterInput {
             listProvider: RhymeListProvider(baseURL: baseJsonURL),
             detailsProvider: SingleRhymeProvider(baseURL: baseJsonURL),
             bookListProvider: BookListForRhymeProvider(baseURL: baseJsonURL),
-            imageDownloader: ImageDownloader(baseURL: baseImageURL))
+            imageDownloader: ImageDownloader(baseURL: baseImageURL),
+            favouritesProvider: FavouritesProvider(localDataProvider: LocalDataProvider()))
         
     }
     lazy var navigationController = makeNavigationController()
@@ -48,7 +52,7 @@ final class AppRouter: AppRouterInput {
     }
     
     func showRhyme(model: ListViewModel) {
-        let factory = RhymeViewControllerFactory(singleRhymeProvider: detailsProvider, bookListProvider: bookListProvider, imageDownloader: imageDownloader)
+        let factory = RhymeViewControllerFactory(singleRhymeProvider: detailsProvider, bookListProvider: bookListProvider, imageDownloader: imageDownloader, favouritesProvider: favouritesProvider)
         let vc = factory.makeViewController(viewModel: model)
         navigationController.pushViewController(vc, animated: true)
     }
@@ -60,7 +64,7 @@ final class AppRouter: AppRouterInput {
     
     
     private func makeNavigationController() -> UINavigationController {
-        let listViewControllerFactory = ListViewControllerFactory(rhymeListProvider: listProvider, imageDownloader: imageDownloader, appRouter: self)
+        let listViewControllerFactory = ListViewControllerFactory(rhymeListProvider: listProvider, imageDownloader: imageDownloader, appRouter: self, favouritesProvider: favouritesProvider)
         return NavigationController(rootViewController: listViewControllerFactory.makeViewController())
     }
 }

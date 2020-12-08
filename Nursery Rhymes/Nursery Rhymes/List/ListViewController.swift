@@ -38,8 +38,8 @@ final class ListViewController: UIViewController {
         if dataSource.isEmpty {
             customView.showLoader()
         }
-        dataSource.fetch { [weak self] (result) in
-            if case let .failure(error) = result {
+        dataSource.fetch { [weak self] anError in
+            if let error = anError {
                 self?.customView.showError(error: error)
             } else {
                 self?.customView.successLoading()
@@ -62,13 +62,15 @@ final class ListViewController: UIViewController {
 import SwiftUI
 
 class ListDataSourceDummy: ListDataSourceInput {
+    
+    
     var didSelectRow: ((ListViewModel, IndexPath) -> Void)? = nil
     
     let isEmpty: Bool = true
     
     func setup(tableView: UITableView) {}
     
-    func fetch(complete: @escaping (Result<Models.List, ConnectionError>) -> Void) {
+    func fetch(complete: @escaping (Error?) -> Void) {
     }
     
     

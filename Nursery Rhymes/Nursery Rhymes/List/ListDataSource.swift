@@ -9,7 +9,7 @@ protocol ListDataSourceInput: class {
     var isEmpty: Bool { get }
     var didSelectRow: ((ListViewModel, IndexPath) -> Void)? { get set }
     func setup(tableView: UITableView)
-    func fetch(complete: @escaping (Result<List, ConnectionError>) -> Void)
+    func fetch(complete: @escaping (Error?) -> Void)
 }
 
 final class ListDataSource: ListDataSourceInput {
@@ -23,6 +23,7 @@ final class ListDataSource: ListDataSourceInput {
     
     let rhymeListProvider: RhymeListProviderInput
     let imageDownloader: ImageDownloaderInput
+    let favouritesProvider: FavouritesProviderInput
     
     var didSelectRow: ((ListViewModel, IndexPath) -> Void)? = nil {
         didSet {
@@ -38,9 +39,12 @@ final class ListDataSource: ListDataSourceInput {
         return snapshot.numberOfItems == 0
     }
     
-    init(rhymeListProvider: RhymeListProviderInput, imageDownloader: ImageDownloaderInput) {
+    init(rhymeListProvider: RhymeListProviderInput,
+         imageDownloader: ImageDownloaderInput,
+         favouritesProvider: FavouritesProviderInput) {
         self.rhymeListProvider = rhymeListProvider
         self.imageDownloader = imageDownloader
+        self.favouritesProvider = favouritesProvider
     }
     
     func setup(tableView: UITableView) {
@@ -50,6 +54,7 @@ final class ListDataSource: ListDataSourceInput {
         
         self.tableView = tableView
         dataSource = makeDataSource()
+        dataSource?.defaultRowAnimation = .fade
         tableDelegate = Delegate(dataSource: dataSource)
         tableDelegate?.didSelectRow = didSelectRow
         
@@ -57,20 +62,31 @@ final class ListDataSource: ListDataSourceInput {
         tableView.delegate = tableDelegate
     }
     
-    func fetch(complete: @escaping (Result<List, ConnectionError>) -> Void) {
-        rhymeListProvider.fetchList {[weak self] result in
-            if case let .success(list) = result {
-                self?.handle(success: list)
+    func fetch(complete: @escaping (Error?) -> Void) {
+        let aggregator = Aggregator<List, FavouritesList, ConnectionError> {[weak self] result in
+            switch result {
+            case .success((let list, let favourites)):
+                self?.handle(list: list, favourites: favourites)
+                complete(nil)
+            case .failure(let error):
+                complete(error)
             }
-            complete(result)
+        }
+        
+        rhymeListProvider.fetchList { result in
+            aggregator.aResult = result
+        }
+        
+        favouritesProvider.load { (list) in
+            aggregator.bResult = .success(list)
         }
     }
     
-    private func handle(success list: List) {
+    private func handle(list: List, favourites: FavouritesList) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ListViewModel>()
 
         let viewModels = list.results.map {
-            $0.toListCellViewModel(isFavourite: false, imageDownloader: self.imageDownloader)
+            $0.toListCellViewModel(isFavourite: favourites.contains($0.id), imageDownloader: self.imageDownloader)
         }
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(viewModels, toSection: .rhymes)
