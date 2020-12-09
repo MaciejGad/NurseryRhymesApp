@@ -63,11 +63,13 @@ final class AppRouter: AppRouterInput {
         let factory = BooksViewControllerFactory(appRouter: self)
         let vc = factory.makeViewController(models: list)
         let nc = NavigationController(rootViewController: vc)
-        navigationController.present(nc, animated: true)
+        navigationController.safePresent(nc, animated: true)
     }
     
     func showBookInBrowser(url: URL) {
-        
+        let factory = BrowserFactory()
+        let vc = factory.makeViewController(url: url)
+        navigationController.safePresent(vc, animated: true)
     }
     
     private func makeNavigationController() -> UINavigationController {

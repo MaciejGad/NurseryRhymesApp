@@ -44,6 +44,8 @@
 		D9A0893825803D600079079F /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A0893725803D600079079F /* BookCell.swift */; };
 		D9A0893D25803D730079079F /* BookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A0893C25803D730079079F /* BookViewModel.swift */; };
 		D9A08942258043950079079F /* BooksViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A08941258043950079079F /* BooksViewControllerFactory.swift */; };
+		D9BCE22E25804B810015A2DB /* BrowserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BCE22D25804B810015A2DB /* BrowserFactory.swift */; };
+		D9BCE23325804D8E0015A2DB /* UIViewController+safePresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BCE23225804D8E0015A2DB /* UIViewController+safePresent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,8 @@
 		D9A0893725803D600079079F /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		D9A0893C25803D730079079F /* BookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewModel.swift; sourceTree = "<group>"; };
 		D9A08941258043950079079F /* BooksViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksViewControllerFactory.swift; sourceTree = "<group>"; };
+		D9BCE22D25804B810015A2DB /* BrowserFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserFactory.swift; sourceTree = "<group>"; };
+		D9BCE23225804D8E0015A2DB /* UIViewController+safePresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+safePresent.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,7 @@
 				D9A088F3257F6FB10079079F /* UIView+pinToSuperview.swift */,
 				D9A0890C257FE0CE0079079F /* Aggregator.swift */,
 				D9A0891925801D8E0079079F /* LocalDataProvider.swift */,
+				D9BCE23225804D8E0015A2DB /* UIViewController+safePresent.swift */,
 			);
 			path = "Nursery Rhymes";
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				D9A0893725803D600079079F /* BookCell.swift */,
 				D9A0893C25803D730079079F /* BookViewModel.swift */,
 				D9A0892725803D360079079F /* BooksDataSource.swift */,
+				D9BCE22D25804B810015A2DB /* BrowserFactory.swift */,
 			);
 			path = Books;
 			sourceTree = "<group>";
@@ -401,8 +407,10 @@
 				D923B507257D8D93001C5760 /* Preview.swift in Sources */,
 				D9A0890D257FE0CE0079079F /* Aggregator.swift in Sources */,
 				D9A088D7257EF65E0079079F /* ListViewModel.swift in Sources */,
+				D9BCE22E25804B810015A2DB /* BrowserFactory.swift in Sources */,
 				D979A39A257E25C5001A366C /* ErrorView.swift in Sources */,
 				D923B4A6257D6E26001C5760 /* SceneDelegate.swift in Sources */,
+				D9BCE23325804D8E0015A2DB /* UIViewController+safePresent.swift in Sources */,
 				D9A08903257FAA280079079F /* RhymeDetailsProvider.swift in Sources */,
 				D9A0893D25803D730079079F /* BookViewModel.swift in Sources */,
 				D9A0893825803D600079079F /* BookCell.swift in Sources */,
