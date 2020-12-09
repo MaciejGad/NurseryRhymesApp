@@ -30,9 +30,7 @@ final class BooksViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DispatchQueue.main.async {
-            self.dataSource.showBooks()
-        }
+        dataSource.showBooks()
     }
     
     @IBAction func hide() {

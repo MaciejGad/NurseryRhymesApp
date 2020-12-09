@@ -49,8 +49,11 @@ final class BooksDataSource: BooksDataSourceInput {
         var snapshot = NSDiffableDataSourceSnapshot<Section, BookViewModel>()
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(books, toSection: .books)
-        dataSource?.apply(snapshot, animatingDifferences: false)
-
+        guard let dataSource = self.dataSource else {
+            assertionFailure("Data source is not setup")
+            return
+        }
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     private func makeDataSource() -> TableViewDataSource? {
