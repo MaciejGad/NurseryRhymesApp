@@ -19,7 +19,7 @@ App has both unit tests (with coverage over 60% of code) and sample UI tests tha
 
 # Previews
 There are previews inside the app for every view. Thanks to the bridge between UIKit and SwiftUI, we can pack UIView (or UIViewController) and display it in canvas. 
-You can write code similar to this one and see your layout without running the app::
+You can write code similar to this one and see your layout without running the app:
 ```swift
 final class ListView: UIView { 
 //...
