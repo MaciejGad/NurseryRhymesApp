@@ -1,6 +1,9 @@
 # NurseryRhymesApp
 NurseryRhymesApp is an example application that displays a list of nursery rhymes, the full text of a single one, and a list of books that contain it. It is build using Xcode 12.2 and swift 5.3. It uses Swift Package Manager for managing dependencies. It can be run on the iPhone, iPad, or macOS (thanks to Catalyst). It supports iOS 13 and 14.
 
+![App screenshot](https://raw.githubusercontent.com/MaciejGad/NurseryRhymesApp/main/Screenshot.png)
+
+
 # Instalation
 Clone this repository, open `Nursery Rhymes.xcodeproj` file, and then go to File->Swift Package -> Resolve Package Versions 
 
