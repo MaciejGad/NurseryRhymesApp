@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D92237FE258062AD003BAAB5 /* RhymeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92237FD258062AD003BAAB5 /* RhymeViewControllerTests.swift */; };
+		D9223803258068F2003BAAB5 /* UIView+firstButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9223802258068F2003BAAB5 /* UIView+firstButton.swift */; };
 		D923B4A4257D6E26001C5760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B4A3257D6E26001C5760 /* AppDelegate.swift */; };
 		D923B4A6257D6E26001C5760 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D923B4A5257D6E26001C5760 /* SceneDelegate.swift */; };
 		D923B4AD257D6E27001C5760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D923B4AC257D6E27001C5760 /* Assets.xcassets */; };
@@ -46,6 +48,12 @@
 		D9A08942258043950079079F /* BooksViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A08941258043950079079F /* BooksViewControllerFactory.swift */; };
 		D9BCE22E25804B810015A2DB /* BrowserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BCE22D25804B810015A2DB /* BrowserFactory.swift */; };
 		D9BCE23325804D8E0015A2DB /* UIViewController+safePresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BCE23225804D8E0015A2DB /* UIViewController+safePresent.swift */; };
+		D9BCE23925804E9A0015A2DB /* RhymeListProviderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BCE23825804E9A0015A2DB /* RhymeListProviderSpy.swift */; };
+		D9BCE23E25804EAA0015A2DB /* SingleRhymeProviderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BCE23D25804EAA0015A2DB /* SingleRhymeProviderSpy.swift */; };
+		D9BCE24325804EBC0015A2DB /* BookListForRhymeProviderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BCE24225804EBC0015A2DB /* BookListForRhymeProviderSpy.swift */; };
+		D9BCE24825804ED10015A2DB /* ImageDownloaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BCE24725804ED10015A2DB /* ImageDownloaderSpy.swift */; };
+		D9BCE24D25804EE10015A2DB /* FavouritesProviderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BCE24C25804EE10015A2DB /* FavouritesProviderSpy.swift */; };
+		D9BCE25225804EF70015A2DB /* AppRouterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BCE25125804EF70015A2DB /* AppRouterSpy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +74,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D92237FD258062AD003BAAB5 /* RhymeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymeViewControllerTests.swift; sourceTree = "<group>"; };
+		D9223802258068F2003BAAB5 /* UIView+firstButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+firstButton.swift"; sourceTree = "<group>"; };
 		D923B4A0257D6E26001C5760 /* Nursery Rhymes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nursery Rhymes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D923B4A3257D6E26001C5760 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D923B4A5257D6E26001C5760 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +119,12 @@
 		D9A08941258043950079079F /* BooksViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksViewControllerFactory.swift; sourceTree = "<group>"; };
 		D9BCE22D25804B810015A2DB /* BrowserFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserFactory.swift; sourceTree = "<group>"; };
 		D9BCE23225804D8E0015A2DB /* UIViewController+safePresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+safePresent.swift"; sourceTree = "<group>"; };
+		D9BCE23825804E9A0015A2DB /* RhymeListProviderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymeListProviderSpy.swift; sourceTree = "<group>"; };
+		D9BCE23D25804EAA0015A2DB /* SingleRhymeProviderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRhymeProviderSpy.swift; sourceTree = "<group>"; };
+		D9BCE24225804EBC0015A2DB /* BookListForRhymeProviderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListForRhymeProviderSpy.swift; sourceTree = "<group>"; };
+		D9BCE24725804ED10015A2DB /* ImageDownloaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloaderSpy.swift; sourceTree = "<group>"; };
+		D9BCE24C25804EE10015A2DB /* FavouritesProviderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesProviderSpy.swift; sourceTree = "<group>"; };
+		D9BCE25125804EF70015A2DB /* AppRouterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterSpy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +204,9 @@
 			isa = PBXGroup;
 			children = (
 				D979A39E257E2CC7001A366C /* ListViewControllerTests.swift */,
+				D92237FD258062AD003BAAB5 /* RhymeViewControllerTests.swift */,
+				D9BCE23725804E7C0015A2DB /* Spy */,
+				D9223802258068F2003BAAB5 /* UIView+firstButton.swift */,
 				D923B4BC257D6E27001C5760 /* Info.plist */,
 			);
 			path = "Nursery RhymesTests";
@@ -242,6 +261,19 @@
 				D9BCE22D25804B810015A2DB /* BrowserFactory.swift */,
 			);
 			path = Books;
+			sourceTree = "<group>";
+		};
+		D9BCE23725804E7C0015A2DB /* Spy */ = {
+			isa = PBXGroup;
+			children = (
+				D9BCE23825804E9A0015A2DB /* RhymeListProviderSpy.swift */,
+				D9BCE23D25804EAA0015A2DB /* SingleRhymeProviderSpy.swift */,
+				D9BCE24225804EBC0015A2DB /* BookListForRhymeProviderSpy.swift */,
+				D9BCE24725804ED10015A2DB /* ImageDownloaderSpy.swift */,
+				D9BCE24C25804EE10015A2DB /* FavouritesProviderSpy.swift */,
+				D9BCE25125804EF70015A2DB /* AppRouterSpy.swift */,
+			);
+			path = Spy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -424,7 +456,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D92237FE258062AD003BAAB5 /* RhymeViewControllerTests.swift in Sources */,
+				D9BCE24825804ED10015A2DB /* ImageDownloaderSpy.swift in Sources */,
+				D9BCE23E25804EAA0015A2DB /* SingleRhymeProviderSpy.swift in Sources */,
+				D9BCE25225804EF70015A2DB /* AppRouterSpy.swift in Sources */,
 				D979A39F257E2CC7001A366C /* ListViewControllerTests.swift in Sources */,
+				D9BCE24325804EBC0015A2DB /* BookListForRhymeProviderSpy.swift in Sources */,
+				D9223803258068F2003BAAB5 /* UIView+firstButton.swift in Sources */,
+				D9BCE23925804E9A0015A2DB /* RhymeListProviderSpy.swift in Sources */,
+				D9BCE24D25804EE10015A2DB /* FavouritesProviderSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

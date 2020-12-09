@@ -77,29 +77,25 @@ final class ListCell: UITableViewCell {
         coverImageView.layer.cornerRadius = 4
         contentView.addSubview(coverImageView)
         
-        
-        let titleStack = UIStackView(arrangedSubviews: [
-            titleLabel,
-            authorLabel
-        ])
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont(name: "Cochin", size: 18)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(titleLabel)
+        
         authorLabel.numberOfLines = 0
         authorLabel.font = UIFont(name: "Cochin", size: 15)
         authorLabel.textColor = .systemGreen
-        titleStack.axis = .vertical
-        titleStack.spacing = 2
-        titleStack.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(titleStack)
+        authorLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(authorLabel)
         
         favouriteView.translatesAutoresizingMaskIntoConstraints = false
         favouriteView.contentMode = .center
         favouriteView.tintColor = .systemRed
         contentView.addSubview(favouriteView)
-        makeConstraints(titleStack: titleStack)
+        makeConstraints()
     }
     
-    private func makeConstraints(titleStack: UIStackView) {
+    private func makeConstraints() {
         NSLayoutConstraint.activate([
             
             //coverImageView
@@ -109,19 +105,22 @@ final class ListCell: UITableViewCell {
             coverImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2),
             coverImageView.heightAnchor.constraint(equalToConstant: 100),
             
-            //titleStack
-            titleStack.leadingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: 8),
-            titleStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
-            titleStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            //titleLabel
+            titleLabel.leadingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            titleLabel.trailingAnchor.constraint(equalTo: favouriteView.leadingAnchor, constant: -8),
+
+            //authorLabel
+            authorLabel.leadingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: 8),
+            authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
+            authorLabel.trailingAnchor.constraint(equalTo: favouriteView.leadingAnchor, constant: -8),
+            authorLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -4),
             
             //favouriteView
-            favouriteView.leadingAnchor.constraint(equalTo: titleStack.trailingAnchor, constant: 8),
             favouriteView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             favouriteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             favouriteView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.15),
             favouriteView.widthAnchor.constraint(equalTo: favouriteView.heightAnchor),
-            
-            
         ])
     }
     

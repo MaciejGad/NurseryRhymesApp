@@ -49,7 +49,12 @@ final class AppRouter: AppRouterInput {
     lazy var navigationController = makeNavigationController()
     
     func rootViewController() -> UIViewController {
-        navigationController
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+            return UIViewController()
+        }
+        #endif
+        return navigationController
     }
     
     func showRhyme(model: ListViewModel) {

@@ -111,7 +111,11 @@ final class ListDataSource: ListDataSourceInput {
         
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(viewModels, toSection: .rhymes)
-        dataSource?.apply(snapshot, animatingDifferences: true)
+        guard let dataSource = self.dataSource else {
+            assertionFailure("Data source is not setup")
+            return
+        }
+        dataSource.apply(snapshot, animatingDifferences: UIView.areAnimationsEnabled)
     }
     
     private func makeDataSource() -> TableViewDataSource? {
