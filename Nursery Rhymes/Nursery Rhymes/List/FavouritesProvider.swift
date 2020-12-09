@@ -10,6 +10,9 @@ protocol FavouritesProviderInput {
     func isFavourite(id: Rhyme.ID, completion: @escaping (Bool) -> Void)
 }
 
+/**
+ In the real-life application user's favorites should be store in the backend or in the CoreData database (or similar) rather than being saved to a JSON file
+ */
 
 class FavouritesProvider: FavouritesProviderInput {
     
@@ -28,6 +31,14 @@ class FavouritesProvider: FavouritesProviderInput {
             }
             return
         }
+        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("RESET_FAVOURITES") {
+            let favouritesList = FavouritesList()
+            self.favouritesList = favouritesList
+            completion(favouritesList)
+            return
+        }
+        #endif
         localDataProvider.data(filename: filename) { [weak self] result in
             switch result {
             case .success(let data):

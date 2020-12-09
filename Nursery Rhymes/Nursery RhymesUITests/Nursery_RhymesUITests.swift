@@ -22,13 +22,36 @@ class Nursery_RhymesUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testAppFlow() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        
+        app.tables.staticTexts["THE THREE CHILDREN"].tap()
+        XCTAssertTrue(app.navigationBars["THE THREE CHILDREN"].exists)
+        
+        app.scrollViews.otherElements.staticTexts["Buy book with this rhyme"].tap()
 
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        XCTAssertTrue(app.staticTexts["Books"].exists)
+        app.navigationBars["Books"].buttons["close"].tap()
+        app.navigationBars["THE THREE CHILDREN"].buttons["Back"].tap()
+        
+    }
+    
+    func testFilter() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launchArguments.append("RESET_FAVOURITES")
+        app.launch()
+        XCTAssertEqual(app.tables.cells.count, 5)
+        app.tables.cells.staticTexts["THE THREE CHILDREN"].tap()
+        
+        let detailsNavigationBar = app.navigationBars["THE THREE CHILDREN"]
+        detailsNavigationBar.buttons["love"].tap()
+        detailsNavigationBar.buttons["Back"].tap()
+        app.navigationBars["Nursery Rhymes"].buttons["love"].tap()
+        XCTAssertEqual(app.tables.cells.count, 1)
     }
 
     func testLaunchPerformance() throws {

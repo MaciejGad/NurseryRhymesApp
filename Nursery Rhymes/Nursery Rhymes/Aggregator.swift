@@ -1,6 +1,9 @@
 import Foundation
 import Connection
 
+/**
+ In the real-life application, I will use PromiseKit (https://github.com/mxcl/PromiseKit) or Operation rather than custom implementation, that depends on variable assignment
+ */
 class Aggregator<A, B, E: Error> {
     var aResult: Result<A, E>? {
         didSet {
